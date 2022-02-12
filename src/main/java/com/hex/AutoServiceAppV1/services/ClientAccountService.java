@@ -1,6 +1,7 @@
 package com.hex.AutoServiceAppV1.services;
 
 import com.hex.AutoServiceAppV1.models.ClientAccount;
+import com.hex.AutoServiceAppV1.models.RegistrationForm;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,10 +12,12 @@ public class ClientAccountService {
 
     ArrayList<ClientAccount> accounts = new ArrayList<>();
 
-    private void saveNewAccount(String userName, String userPassword, String userPhoneNumber){
-        ClientAccount newAccount = new ClientAccount(id(), userName, userPassword, userPhoneNumber, createdAt());
+    public void saveNewAccount(RegistrationForm registrationForm){
+        ClientAccount newAccount = new ClientAccount(id(), registrationForm.getName(),
+                registrationForm.getPassword(), registrationForm.getPhoneNumber(), createdAt());
         System.out.println(newAccount);
         accounts.add(newAccount);
+        System.out.println(accounts);
     }
 
     private long id(){
