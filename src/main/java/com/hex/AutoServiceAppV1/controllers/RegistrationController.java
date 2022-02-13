@@ -21,6 +21,6 @@ public class RegistrationController {
     @PostMapping
     public String processRegistration(RegistrationForm form) {
         clientAccountService.saveNewAccount(form);
-        return "redirect:/main";
+        return "redirect:/order";
     }
 }
