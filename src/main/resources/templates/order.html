@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Car service</title>
 </head>
 <body>
-
+<h1>Choose services:</h1>
+<form method="POST" th:action="@{/order}" th:object="${order}">
+    <h3>Choose your service:</h3>
+    <div th:each="service : ${serviceList}">
+        <input type="checkbox" th:field="*{chosenServices}" th:value="${service.id}">
+        <span th:text="${service.description}">SERVICE</span><br/>
+    </div>
+    <div>
+        <button>Make order</button>
+    </div>
+</form>
 </body>
 </html>

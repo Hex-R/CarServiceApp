@@ -9,11 +9,13 @@ import java.util.ArrayList;
 @Service
 public class OrderService {
 
-    ArrayList<Order> currentOrders;
+    ArrayList<Order> currentOrders = new ArrayList<>();
 
     public void saveNewOrder(OrderForm orderForm){
         currentOrders.add(new Order(generateID(),
                 orderForm.getChosenServices(), orderForm.getSelectedSlot()));
+
+        System.out.println(currentOrders);
     }
 
     private long generateID(){

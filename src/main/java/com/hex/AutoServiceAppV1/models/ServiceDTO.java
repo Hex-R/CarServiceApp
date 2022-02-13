@@ -7,6 +7,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class ServiceDTO {
 
-    private long id;
+    private int id;
     private String description;
 }
