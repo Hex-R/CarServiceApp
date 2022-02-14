@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ServiceDTO {
+public class ServiceForCar {
 
     private int id;
     private String description;

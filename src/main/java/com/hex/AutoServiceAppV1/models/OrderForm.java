@@ -11,6 +11,6 @@ import java.util.ArrayList;
 @NoArgsConstructor
 public class OrderForm {
 
-    private ArrayList<ServiceDTO> chosenServices;
+    private ArrayList<ServiceForCar> chosenServices;
     private TimeSlot selectedSlot;
 }

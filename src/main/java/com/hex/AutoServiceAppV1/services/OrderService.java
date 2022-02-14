@@ -15,6 +15,7 @@ public class OrderService {
         currentOrders.add(new Order(generateID(),
                 orderForm.getChosenServices(), orderForm.getSelectedSlot()));
 
+        System.out.println(orderForm);
         System.out.println(currentOrders);
     }
 
