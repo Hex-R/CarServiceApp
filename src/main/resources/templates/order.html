@@ -13,11 +13,11 @@
         <span th:text="${service.description}">SERVICE</span><br/>
     </div>
     <h4>Choose available time:</h4>
-    <div th:each="timeSlot : ${timeSlotsList}">
-        <input type="checkbox" th:field="*{selectedSlot}" th:value="${timeSlot.id}">
-        <span th:text="${timeSlot.day}">SERVICE</span><br/>
-        <span th:text="${timeSlot.time}">SERVICE</span><br/>
-    </div>
+    <select th:field="*{selectedSlot}">
+        <option th:each="timeSlot : ${timeSlotsList}"
+                th:value="${timeSlot.id}"
+                th:text="#{${timeSlot.day + timeSlot.time}}">Wireframe</option>
+    </select>
     <div>
         <button>Make order</button>
     </div>
