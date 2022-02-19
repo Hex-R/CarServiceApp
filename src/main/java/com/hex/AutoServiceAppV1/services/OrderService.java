@@ -16,7 +16,6 @@ public class OrderService {
                 orderForm.getChosenServices(), orderForm.getSelectedSlot()));
 
         System.out.println(orderForm);
-        System.out.println(currentOrders);
     }
 
     private long generateID(){

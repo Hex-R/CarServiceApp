@@ -17,7 +17,6 @@ public class ClientAccountService {
                 registrationForm.getPassword(), registrationForm.getPhoneNumber(), createdAt());
         System.out.println(newAccount);
         accounts.add(newAccount);
-        System.out.println(accounts);
     }
 
     private long id(){
