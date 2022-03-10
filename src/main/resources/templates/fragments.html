@@ -42,13 +42,13 @@
             </div>
 
             <div sec:authorize="hasAuthority('USER')">
-                <form form-method="post" th:action="@{/logout}" >
+                <form method="post" th:action="@{/logout}" >
                     <button class="btn btn-primary" type="submit" > Logout </button>
                 </form>
             </div>
 
             <div sec:authorize="!hasAuthority('USER')">
-                <a class="nav-link" href="/login">Login</a>
+                <a class="btn btn-primary" href="/login">Login</a>
             </div>
 
         </div>

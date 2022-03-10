@@ -13,7 +13,7 @@
     <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
 </div>
 
-<form method="POST" th:action="@{/login}" >
+<form method="post" th:action="@{/login}" >
     <label for="username"> Имя: </label>
     <input type="text"  class="form-control" id="username" name="username"/>
     <br/>
