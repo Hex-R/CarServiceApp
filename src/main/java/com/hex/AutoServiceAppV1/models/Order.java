@@ -10,6 +10,6 @@ import java.util.ArrayList;
 public class Order {
 
     private long id;
-    private ArrayList<ServiceForCar> chosenServices;
+    private ArrayList<CarService> chosenServices;
     private TimeSlot selectedSlot;
 }
