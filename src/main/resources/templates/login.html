@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Car service</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:insert="~{fragments :: head}"></div>
+
 <body>
+
+<div th:insert="~{fragments :: navbar}"></div>
+
 <h1>Login</h1>
 
 <div th:if="${param.error}">
@@ -23,5 +24,8 @@
 </form>
 
 <p> Ещё не зарегистрированы? <a th:href="@{/register}">Регистрация</a> </p>
+
+<div th:insert="~{fragments :: BootstrapJS}"></div>
+
 </body>
 </html>

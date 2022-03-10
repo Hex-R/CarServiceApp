@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Car service</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:insert="~{fragments :: head}"></div>
+
 <body>
+
+<div th:insert="~{fragments :: navbar}"></div>
+
 <h1>Welcome to our service. Here you can choose any services for your car and
 choose time.</h1>
 
 <p>Click <a th:href="@{/login}">here</a> to login.</p>
+
+<div th:insert="~{fragments :: BootstrapJS}"></div>
+
 </body>
 </html>
