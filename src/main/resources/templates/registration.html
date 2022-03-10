@@ -2,19 +2,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Auto service</title>
+    <title>Car service</title>
 </head>
 <body>
 <h1>Register</h1>
 
-<form method="POST" th:action="@{/register}" id="registerForm">
-    <label for="name">Username: </label>
-    <input type="text" name="name"/><br/>
-    <label for="password">Password: </label>
-    <input type="password" name="password"/><br/>
-    <label for="phoneNumber">Phone number: </label>
-    <input type="text" name="phoneNumber"/><br/>
-    <input type="submit" value="Register"/>
+<div th:if="usernameError"??> ${usernameError} </div>
+
+<form method="POST" th:action="@{/register}" th:object="${user}">
+    <label for="username"> Имя: </label>
+    <input type="text" th:field="*{username}" id="username"/>
+    <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</div>
+    <br/>
+    <label for="password"> Пароль: </label>
+    <input type="password" th:field="*{password}" id="password"/>
+    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
+    <br/>
+    <label for="email"> Email: </label>
+    <input type="email" th:field="*{email}" id="email"/>
+    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+    <br/>
+    <label for="phoneNumber"> Номер телефона: </label>
+    <input type="text" th:field="*{phoneNumber}" id="phoneNumber"/>
+    <div style="color:red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Phone number error</div>
+    <br/>
+    <input type="submit" value="Регистрация"/>
 </form>
 </body>
 </html>
