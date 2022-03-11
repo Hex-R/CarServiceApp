@@ -21,6 +21,7 @@ create table usr
 create table car_service
 (
     id          int8 not null,
+    type        varchar(255),
     name        varchar(255),
     description varchar(2048),
     price       int4 not null,

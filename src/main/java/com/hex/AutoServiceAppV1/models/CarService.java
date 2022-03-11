@@ -14,6 +14,8 @@ public class CarService {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    private ServiceType type;
+
     private String name;
 
     private String description;
