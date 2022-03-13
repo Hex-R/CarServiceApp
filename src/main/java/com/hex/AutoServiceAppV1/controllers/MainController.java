@@ -23,18 +23,46 @@ public class MainController {
     }
 
     @GetMapping("/diagnostics")
-    public String showDiagnosticsServices(){return " ";}
+    public String showDiagnosticsServices(Model model){
+
+        model.addAttribute("diagnosticsServices",
+                carServiceRepository.findByType(ServiceType.DIAGNOSTICS));
+
+        return "diagnostics";
+    }
 
     @GetMapping("/repair")
-    public String showRepairServices(){return " ";}
+    public String showRepairServices(Model model){
+
+        model.addAttribute("repairServices",
+                carServiceRepository.findByType(ServiceType.REPAIR));
+
+        return "repair";
+    }
 
     @GetMapping("/body_repair")
-    public String showBodyRepairServices(){return " ";}
+    public String showBodyRepairServices(Model model){
+
+        model.addAttribute("bodyRepairServices",
+                carServiceRepository.findByType(ServiceType.BODY_REPAIR));
+
+        return "body_repair";
+    }
 
     @GetMapping("/tire_fitting")
-    public String showTireFittingServices(){return " ";}
+    public String showTireFittingServices(Model model){
+
+
+
+        return "tire_fitting";
+    }
 
     @GetMapping("/tires_and_wheels")
-    public String showTiresAndWheels(){return " ";}
+    public String showTiresAndWheels(Model model){
+
+
+
+        return "tires_and_wheels";
+    }
 
 }

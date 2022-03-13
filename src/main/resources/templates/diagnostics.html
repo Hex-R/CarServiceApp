@@ -7,7 +7,7 @@
 
 <div th:insert="~{fragments :: navbar}"></div>
 
-<img th:src="@{/images/maintenance_banner.jpg}" class="img-fluid" />
+<img th:src="@{/images/diagnostics_banner.jpg}" class="img-fluid" />
 
 <h1> Записаться на сервис </h1>
 
@@ -19,7 +19,7 @@
     </tr>
     </thead>
     <tbody>
-    <div th:each="CarService : ${maintenanceServices}">
+    <div th:each="CarService : ${diagnosticsServices}">
         <tr>
             <td th:text="${CarService.getName()}"> service name </td>
             <td th:text="${'от ' + CarService.getPrice()}"> service price </td>
