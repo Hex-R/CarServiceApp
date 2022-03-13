@@ -14,6 +14,7 @@ public class CarService {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     private ServiceType type;
 
     private String name;
