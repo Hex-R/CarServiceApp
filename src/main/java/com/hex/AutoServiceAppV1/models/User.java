@@ -9,12 +9,14 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Data
 @Entity
 @Table(name = "usr")
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -35,6 +37,9 @@ public class User implements UserDetails {
     @NotBlank(message = "Номер телефона не может быть пустым")
     @Min(value = 10, message = "Минимум 10 цифр")
     private String phoneNumber;
+
+    @OneToMany
+    private List<ServiceOrder> serviceOrders;
 
     private String activationCode;
 
