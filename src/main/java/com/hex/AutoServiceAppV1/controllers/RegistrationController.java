@@ -23,7 +23,9 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String processRegistration(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, Model model) {
+    public String processRegistration(@Valid @ModelAttribute User user, BindingResult bindingResult, Model model) {
+
+        System.out.println(bindingResult);
 
         if (bindingResult.hasErrors())
             return "registration";

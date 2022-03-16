@@ -22,12 +22,12 @@ public class User implements UserDetails {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @NotBlank(message = "Имя не может быть пустым")
+    @NotBlank(message = "Логин не может быть пустым")
     @Min(value = 4, message = "Минимум 4 символа")
     private String username;
 
     @NotBlank(message = "Пароль не может быть пустым")
-    @Min(value = 4, message = "Минимум 4 символа")
+    @Min(value = 6, message = "Минимум 6 символов")
     private String password;
 
     @Email(message = "Введите корректный адрес почты")

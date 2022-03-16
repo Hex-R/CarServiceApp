@@ -9,27 +9,55 @@
 
 <h1>Register</h1>
 
-<div th:if="usernameError"??> ${usernameError} </div>
 
-<form method="POST" th:action="@{/register}" th:object="${user}">
-    <label for="username"> Имя: </label>
-    <input type="text" th:field="*{username}" class="small" th:errorclass="fieldError" id="username"/>
-    <br/>
-    <p th:if="${#fields.hasErrors('all')}" th:errors="*{all}">Incorrect date</p>
-    <label for="password"> Пароль: </label>
-    <input type="password" th:field="*{password}" id="password"/>
-    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
-    <br/>
-    <label for="email"> Email: </label>
-    <input type="email" th:field="*{email}" id="email"/>
-    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
-    <br/>
-    <label for="phoneNumber"> Номер телефона: </label>
-    <input type="text" th:field="*{phoneNumber}" id="phoneNumber"/>
-    <div style="color:red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Phone number error</div>
-    <br/>
-    <input type="submit" value="Регистрация"/>
+<form th:action="@{/register}" th:object="${user}" method="post" class="form">
+
+    <div class="container">
+
+        <div class="row justify-content-md-center">
+
+            <div class="col col-lg-2"></div>
+
+            <div class="col-md-3">
+                <div class="row my-2">
+                    <input class="form-control" type="text" th:field="*{username}" id="username" placeholder="Логин"
+                           aria-describedby="usernameHelp"/>
+                    <div id="usernameHelp" class="form-text">Минимум четыре символа</div>
+                    <div class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+                </div>
+
+                <div class="row my-2">
+                    <input class="form-control" type="text" th:field="*{password}" id="password" placeholder="Пароль" aria-describedby="passwordHelp"/>
+                    <div id="passwordHelp" class="form-text">Минимум шесть символов</div>
+                    <div class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                </div>
+
+                <div class="row my-2">
+                    <input class="form-control" type="text" th:field="*{email}" id="email" placeholder="Email">
+                    <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                </div>
+
+                <div class="row my-2">
+                    <input class="form-control" type="text" th:field="*{phoneNumber}" id="phoneNumber"
+                           placeholder="Номер телефона" aria-describedby="phoneNumberHelp">
+                    <div id="phoneNumberHelp" class="form-text">В любом формате</div>
+                    <div class="alert alert-danger" th:if="${#fields.hasErrors('phoneNumber')}"
+                         th:errors="*{phoneNumber}"></div>
+                </div>
+
+                <div class="row my-4">
+                    <input type="submit" class="btn btn-success" value="Регистрация">
+                </div>
+
+            </div>
+
+            <div class="col col-lg-2"></div>
+
+        </div>
+    </div>
+
 </form>
+
 
 <div th:insert="~{fragments :: BootstrapJS}"></div>
 
