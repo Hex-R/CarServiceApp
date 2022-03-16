@@ -23,17 +23,26 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String processRegistration(@Valid @ModelAttribute User user, BindingResult bindingResult, Model model) {
+    public String processRegistration(@Valid @ModelAttribute User user,
+                                      BindingResult bindingResult,
+                                      Model model,
+                                      @RequestParam("passwordConfirmation") String passwordConfirmation) {
 
         System.out.println(bindingResult);
 
-        if (bindingResult.hasErrors())
+        boolean isPasswordConfirmationIncorrect = !user.getPassword().equals(passwordConfirmation);
+
+        if (isPasswordConfirmationIncorrect){
+            model.addAttribute("passwordConfirmationError", "Пароли не совпадают");
+        }
+
+        if (bindingResult.hasErrors() || isPasswordConfirmationIncorrect)
             return "registration";
 
         if (userService.addUser(user)) {
             return "redirect:/login";
         } else {
-            model.addAttribute("usernameError", "User already exists");
+            model.addAttribute("usernameError", "Пользователь с таким логином уже существует");
             return "registration";
         }
     }

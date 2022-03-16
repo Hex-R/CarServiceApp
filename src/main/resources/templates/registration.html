@@ -7,12 +7,9 @@
 
 <div th:insert="~{fragments :: navbar}"></div>
 
-<h1>Register</h1>
-
-
 <form th:action="@{/register}" th:object="${user}" method="post" class="form">
 
-    <div class="container">
+    <div class="container my-5">
 
         <div class="row justify-content-md-center">
 
@@ -23,13 +20,23 @@
                     <input class="form-control" type="text" th:field="*{username}" id="username" placeholder="Логин"
                            aria-describedby="usernameHelp"/>
                     <div id="usernameHelp" class="form-text">Минимум четыре символа</div>
-                    <div class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+                    <div class="alert alert-danger" th:if="${#fields.hasErrors('username')}"
+                         th:errors="*{username}"></div>
                 </div>
 
                 <div class="row my-2">
-                    <input class="form-control" type="text" th:field="*{password}" id="password" placeholder="Пароль" aria-describedby="passwordHelp"/>
+                    <input class="form-control" type="text" th:field="*{password}" id="password" placeholder="Пароль"
+                           aria-describedby="passwordHelp"/>
                     <div id="passwordHelp" class="form-text">Минимум шесть символов</div>
-                    <div class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                    <div class="alert alert-danger" th:if="${#fields.hasErrors('password')}"
+                         th:errors="*{password}"></div>
+                </div>
+
+                <div class="row my-2">
+                    <input class="form-control" type="text" name="passwordConfirmation"
+                           placeholder="Подтвердите пароль"/>
+                    <div class="alert alert-danger" th:if="${passwordConfirmationError}"
+                         th:text="${passwordConfirmationError}"></div>
                 </div>
 
                 <div class="row my-2">
@@ -47,6 +54,8 @@
 
                 <div class="row my-4">
                     <input type="submit" class="btn btn-success" value="Регистрация">
+                    <div class="alert alert-danger" th:if="${usernameError}"
+                         th:text="${usernameError}"></div>
                 </div>
 
             </div>
