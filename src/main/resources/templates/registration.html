@@ -13,9 +13,9 @@
 
 <form method="POST" th:action="@{/register}" th:object="${user}">
     <label for="username"> Имя: </label>
-    <input type="text" th:field="*{username}" id="username"/>
-    <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</div>
+    <input type="text" th:field="*{username}" class="small" th:errorclass="fieldError" id="username"/>
     <br/>
+    <p th:if="${#fields.hasErrors('all')}" th:errors="*{all}">Incorrect date</p>
     <label for="password"> Пароль: </label>
     <input type="password" th:field="*{password}" id="password"/>
     <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>

@@ -23,28 +23,28 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String processRegistration(Model model, @Valid User user, BindingResult bindingResult) {
+    public String processRegistration(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors())
             return "registration";
 
         if (userService.addUser(user)) {
             return "redirect:/login";
-        }else {
+        } else {
             model.addAttribute("usernameError", "User already exists");
             return "registration";
         }
     }
 
     @GetMapping("/activation/{code}")
-    public String activateAccount(Model model, @PathVariable String code){
+    public String activateAccount(Model model, @PathVariable String code) {
 
         boolean isActivated = userService.activateUser(code);
 
-        if (isActivated){
+        if (isActivated) {
             model.addAttribute("messageType", "success");
             model.addAttribute("message", "User successfully activated");
-        }else {
+        } else {
             model.addAttribute("messageType", "danger");
             model.addAttribute("message", "Activation code not found");
         }
