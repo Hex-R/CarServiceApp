@@ -7,15 +7,16 @@
 
 <div th:insert="~{fragments :: navbar}"></div>
 
-<form th:action="@{/register}" th:object="${user}" method="post" class="form">
 
-    <div class="container my-5">
+<div class="container my-5">
 
-        <div class="row justify-content-md-center">
+    <div class="row justify-content-md-center">
 
-            <div class="col col-lg-2"></div>
+        <div class="col col-lg-2"></div>
 
-            <div class="col-md-3">
+        <div class="col-md-3">
+            <form th:action="@{/register}" th:object="${user}" method="post" class="form">
+
                 <div class="row my-2">
                     <input class="form-control" type="text" th:field="*{username}" id="username" placeholder="Логин"
                            aria-describedby="usernameHelp"/>
@@ -57,20 +58,22 @@
                     <div class="alert alert-danger" th:if="${recaptchaError}" th:text="${recaptchaError}"></div>
                 </div>
 
-                <div class="row my-3">
+                <div class="row my-2">
                     <input type="submit" class="btn btn-success" value="Регистрация">
                     <div class="alert alert-danger" th:if="${usernameError}"
                          th:text="${usernameError}"></div>
                 </div>
+            </form>
 
+            <div class="row my-3">
+                <a class="btn btn-primary" th:href="@{/login}"> Вернуться на страницу входа </a>
             </div>
-
-            <div class="col col-lg-2"></div>
-
         </div>
-    </div>
 
-</form>
+        <div class="col col-lg-2"></div>
+
+    </div>
+</div>
 
 
 <div th:insert="~{fragments :: BootstrapJS}"></div>
