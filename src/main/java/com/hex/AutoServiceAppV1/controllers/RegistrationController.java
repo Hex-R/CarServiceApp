@@ -1,21 +1,34 @@
 package com.hex.AutoServiceAppV1.controllers;
 
 import com.hex.AutoServiceAppV1.models.User;
+import com.hex.AutoServiceAppV1.models.dto.CaptchaResponseDto;
 import com.hex.AutoServiceAppV1.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
+import java.util.Collections;
 
 @Controller
 @RequestMapping("/register")
 public class RegistrationController {
 
     @Autowired
-    UserService userService = new UserService();
+    private UserService userService = new UserService();
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Value("${recaptcha.secret}")
+    private String recaptchaSecret;
+
+    @Value("${recaptcha.url}")
+    private String recaptchaUrl;
 
     @GetMapping
     public String showRegistrationForm(@ModelAttribute("user") User user) {
@@ -26,9 +39,15 @@ public class RegistrationController {
     public String processRegistration(@Valid @ModelAttribute User user,
                                       BindingResult bindingResult,
                                       Model model,
-                                      @RequestParam("passwordConfirmation") String passwordConfirmation) {
+                                      @RequestParam("passwordConfirmation") String passwordConfirmation,
+                                      @RequestParam("g-recaptcha-response") String recaptchaClientResponse) {
 
-        System.out.println(bindingResult);
+        String url = String.format(recaptchaUrl, recaptchaSecret, recaptchaClientResponse);
+        CaptchaResponseDto recaptchaServerResponse = restTemplate.postForObject(url, Collections.emptyList(), CaptchaResponseDto.class);
+
+        if (!recaptchaServerResponse.isSuccess()){
+            model.addAttribute("recaptchaError", "Пройдите капчу");
+        }
 
         boolean isPasswordConfirmationIncorrect = !user.getPassword().equals(passwordConfirmation);
 
@@ -36,7 +55,7 @@ public class RegistrationController {
             model.addAttribute("passwordConfirmationError", "Пароли не совпадают");
         }
 
-        if (bindingResult.hasErrors() || isPasswordConfirmationIncorrect)
+        if (bindingResult.hasErrors() || isPasswordConfirmationIncorrect || !recaptchaServerResponse.isSuccess())
             return "registration";
 
         if (userService.addUser(user)) {
