@@ -41,7 +41,8 @@
                 </div>
 
                 <div class="row my-2">
-                    <input class="form-control" type="text" th:field="*{email}" id="email" placeholder="Email">
+                    <input class="form-control" type="text" th:field="*{email}" id="email" placeholder="Email" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">Мы отправим вам ссылку для верификации</div>
                     <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                 </div>
 

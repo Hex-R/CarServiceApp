@@ -59,11 +59,16 @@ public class RegistrationController {
             return "registration";
 
         if (userService.addUser(user)) {
-            return "redirect:/login";
+            return "redirect:/register/success";
         } else {
             model.addAttribute("usernameError", "Пользователь с таким логином уже существует");
             return "registration";
         }
+    }
+
+    @GetMapping("/success")
+    public String showRegistrationSuccessPage(){
+        return "registration_success";
     }
 
     @GetMapping("/activation/{code}")
@@ -72,11 +77,11 @@ public class RegistrationController {
         boolean isActivated = userService.activateUser(code);
 
         if (isActivated) {
-            model.addAttribute("messageType", "success");
-            model.addAttribute("message", "User successfully activated");
+            model.addAttribute("isActivationSuccess", true);
+            model.addAttribute("activationMessage", "Аккаунт успешно активирован");
         } else {
-            model.addAttribute("messageType", "danger");
-            model.addAttribute("message", "Activation code not found");
+            model.addAttribute("isActivationSuccess", false);
+            model.addAttribute("activationMessage", "Пользователь был активирован ранее");
         }
 
         return "/login";

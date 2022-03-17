@@ -14,18 +14,23 @@
         <div class="col col-lg-2"></div>
 
         <div class="col-md-3">
+            <div class="row my-2" th:if="${activationMessage}">
+                <div class="alert alert-success" th:if="${isActivationSuccess}" th:text="${activationMessage}"></div>
+                <div class="alert alert-danger" th:unless="${isActivationSuccess}" th:text="${activationMessage}"></div>
+            </div>
+
             <form method="post" th:action="@{/login}" class="form">
 
                 <div class="row my-2" th:if="${param.error}">
-                    <div class="alert alert-danger"> Неверные данные</div>
+                    <div class="alert alert-danger"> Некорректные данные </div>
                 </div>
 
                 <div class="row my-2">
-                    <input class="form-control" type="text" id="username" placeholder="Логин"/>
+                    <input class="form-control" type="text" id="username" name="username" placeholder="Логин"/>
                 </div>
 
                 <div class="row my-2">
-                    <input class="form-control" type="text" id="password" placeholder="Пароль"/>
+                    <input class="form-control" type="text" id="password" name="password" placeholder="Пароль"/>
                 </div>
 
                 <div class="row my-2">
