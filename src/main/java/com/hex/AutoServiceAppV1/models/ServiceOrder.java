@@ -32,6 +32,8 @@ public class ServiceOrder {
     @ManyToMany(targetEntity=CarService.class)
     private List<CarService> services;
 
+    private boolean isCompleted;
+
     @PrePersist
     void placedAt() {
         this.placedAt = new Date();

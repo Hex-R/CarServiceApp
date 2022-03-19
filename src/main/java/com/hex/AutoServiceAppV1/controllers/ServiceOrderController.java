@@ -10,10 +10,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -47,6 +44,15 @@ public class ServiceOrderController {
 
         order.setUser(currentUser);
         serviceOrderRepository.save(order);
+
+        return "redirect:/user_profile";
+    }
+
+    //Нужно заменить на Delete и разобраться с ошибкой 405
+    @PostMapping("/{id}")
+    public String deleteServiceOrder(@PathVariable Long id){
+
+        serviceOrderRepository.deleteById(id);
 
         return "redirect:/user_profile";
     }
