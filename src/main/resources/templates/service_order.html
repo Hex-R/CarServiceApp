@@ -7,10 +7,10 @@
 
 <div th:insert="~{fragments :: navbar}"></div>
 
-<img th:src="@{/images/main_banner.jpg}" class="img-fluid"/>
+<img th:src="@{/images/service_order_banner.jpg}" class="img-fluid"/>
 
-<form method="post" th:action="@{/service_order}" th:object="${Order}">
-    <div class="d-grid gap-2 col-8 mx-auto my-2">
+<form method="post" th:action="@{/service_order}" th:object="${order}">
+    <div class="d-grid gap-2 col-6 mx-auto my-2">
         <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#type1"
                 aria-expanded="false" aria-controls="type1">
             Техническое обслуживание
@@ -18,9 +18,11 @@
         <div class="collapse" id="type1">
             <div th:each="CarService : ${maintenanceServices}">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" th:field="*{services}" th:value="${CarService.id}"
+                    <input class="form-check-input" type="checkbox" th:field="*{services}"
+                           th:value="${CarService.id}"
                            id="flexCheck1">
-                    <label class="form-check-label" for="flexCheck1" th:text="${CarService.name}"> Car service </label>
+                    <label class="form-check-label" for="flexCheck1" th:text="${CarService.name}"> Car
+                        service </label>
                 </div>
             </div>
         </div>
@@ -32,9 +34,11 @@
         <div class="collapse" id="type2">
             <div th:each="CarService : ${diagnosticsServices}">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" th:field="*{services}" th:value="${CarService.id}"
+                    <input class="form-check-input" type="checkbox" th:field="*{services}"
+                           th:value="${CarService.id}"
                            id="flexCheck2">
-                    <label class="form-check-label" for="flexCheck2" th:text="${CarService.name}"> Car service </label>
+                    <label class="form-check-label" for="flexCheck2" th:text="${CarService.name}"> Car
+                        service </label>
                 </div>
             </div>
         </div>
@@ -46,9 +50,11 @@
         <div class="collapse" id="type3">
             <div th:each="CarService : ${repairServices}">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" th:field="*{services}" th:value="${CarService.id}"
+                    <input class="form-check-input" type="checkbox" th:field="*{services}"
+                           th:value="${CarService.id}"
                            id="flexCheck3">
-                    <label class="form-check-label" for="flexCheck3" th:text="${CarService.name}"> Car service </label>
+                    <label class="form-check-label" for="flexCheck3" th:text="${CarService.name}"> Car
+                        service </label>
                 </div>
             </div>
         </div>
@@ -60,13 +66,29 @@
         <div class="collapse" id="type4">
             <div th:each="CarService : ${bodyRepairServices}">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" th:field="*{services}" th:value="${CarService.id}"
+                    <input class="form-check-input" type="checkbox" th:field="*{services}"
+                           th:value="${CarService.id}"
                            id="flexCheck4">
-                    <label class="form-check-label" for="flexCheck4" th:text="${CarService.name}"> Car service </label>
+                    <label class="form-check-label" for="flexCheck4" th:text="${CarService.name}"> Car
+                        service </label>
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary" type="submit"> Записаться</button>
+
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('services')}">
+            <p class="text-center" th:errors="*{services}"> Error text </p>
+        </div>
+
+        <div class="col-md-4 mx-auto">
+            <input class="form-control my-2" type="datetime-local" th:field="*{executionDate}" name="datetimes"
+                   min="2022-03-19T14:40" max="2022-04-30T00:00" required/>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('executionDate')}"
+                 th:errors="*{executionDate}"></div>
+
+            <div class="row mx-auto my-3">
+                <button class="btn btn-primary" type="submit"> Записаться</button>
+            </div>
+        </div>
     </div>
 </form>
 

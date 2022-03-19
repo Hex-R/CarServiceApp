@@ -1,8 +1,11 @@
 package com.hex.AutoServiceAppV1.models;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -18,9 +21,14 @@ public class ServiceOrder {
 
     private Date placedAt;
 
+    @NotNull(message = "Выберите дату и время для записи")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private Date executionDate;
+
     @ManyToOne
     private User user;
 
+    @NotEmpty(message = "Выберите услуги")
     @ManyToMany(targetEntity=CarService.class)
     private List<CarService> services;
 
