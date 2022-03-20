@@ -2,6 +2,7 @@ package com.hex.AutoServiceAppV1.services;
 
 import com.hex.AutoServiceAppV1.models.Role;
 import com.hex.AutoServiceAppV1.models.User;
+import com.hex.AutoServiceAppV1.models.UserDetailsForm;
 import com.hex.AutoServiceAppV1.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Collections;
 import java.util.UUID;
@@ -48,6 +50,24 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
+    public boolean updateUser(User user, UserDetailsForm userDetailsForm){
+
+        String newPassword = userDetailsForm.getPassword();
+
+        if (StringUtils.hasLength(newPassword)){
+
+            if (StringUtils.hasText(newPassword) && newPassword.length() >= 6 && newPassword.length() <= 30){
+                user.setPassword(passwordEncoder.encode(userDetailsForm.getPassword()));
+            }else return false;
+        }
+
+        user.setEmail(userDetailsForm.getEmail());
+        user.setPhoneNumber(userDetailsForm.getPhoneNumber());
+
+        userRepository.save(user);
+        return true;
+    }
+
     private void sendMessage(User user) {
         if (!user.getEmail().isBlank()) {
             String message = String.format(
@@ -60,17 +80,6 @@ public class UserService implements UserDetailsService {
 
             mailSenderService.send(user.getEmail(), "Activation code", message);
         }
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-
-        return user;
     }
 
     public boolean activateUser(String code) {
@@ -86,5 +95,16 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
 
         return true;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        return user;
     }
 }

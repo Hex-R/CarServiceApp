@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ServiceOrderRepository extends CrudRepository<ServiceOrder, Long> {
 
-    List<ServiceOrder> findByIsCompleted(boolean isCompleted);
+    List<ServiceOrder> findByUserIdAndIsCompleted(Long userId, boolean isCompleted);
 }

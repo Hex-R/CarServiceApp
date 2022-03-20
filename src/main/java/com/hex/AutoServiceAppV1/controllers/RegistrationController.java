@@ -19,7 +19,7 @@ import java.util.Collections;
 public class RegistrationController {
 
     @Autowired
-    private UserService userService = new UserService();
+    private UserService userService;
 
     @Autowired
     private RestTemplate restTemplate;

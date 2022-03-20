@@ -7,47 +7,132 @@
 
 <div th:insert="~{fragments :: navbar}"></div>
 
-<div class="d-grid gap-2 col-8 mx-auto my-2">
-    <ol class="list-group list-group-flush mt-5">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="mx-auto">
-                <div class="fw-bold">Активные записи</div>
-            </div>
-        </li>
-    </ol>
-    <ol class="list-group list-group-numbered">
-        <li class="list-group-item list-group-item-success d-flex justify-content-between align-items-start"
-            th:each="ServiceOrder : ${activeOrders}">
-            <div class="ms-2 me-5">
-                <div class="fw-bold" th:text="${#calendars.format(ServiceOrder.executionDate,'dd.MM.yyyy HH:mm')}">Order
-                    execution date
-                </div>
-            </div>
-            <span class="text-start me-auto" th:text="${ServiceOrder.services}">Services in order</span>
-            <form th:method="post" th:action="@{/service_order/{id} (id=${ServiceOrder.getId()})}" >
-                <input class="btn btn-primary" type="submit" value="Отменить"/>
-            </form>
-        </li>
-    </ol>
+<div class="row my-5">
+    <div class="col ms-3">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <button th:class="${isValidating}? 'nav-link' : 'nav-link active'" id="v-pills-orders-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#v-pills-orders"
+                    type="button" role="tab" aria-controls="v-pills-orders"
+                    th:aria-selected="${isValidating}? 'false' : 'true'"
+            >Записи
+            </button>
+            <button th:class="${isValidating}? 'nav-link active' : 'nav-link'" id="v-pills-change_profile_details-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#v-pills-change_profile_details" type="button" role="tab"
+                    aria-controls="v-pills-change_profile_details" th:aria-selected="${isValidating}? 'true' : 'false'">
+                Изменить данные профиля
+            </button>
+        </div>
+    </div>
 
-    <ol class="list-group list-group-flush mt-5">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="mx-auto">
-                <div class="fw-bold">Завершённые записи</div>
+    <div class="col-10 me-4">
+        <div class="tab-content" id="v-pills-tabContent">
+            <div th:class="${isValidating}? 'tab-pane fade' : 'tab-pane fade show active'" id="v-pills-orders"
+                 role="tabpanel"
+                 aria-labelledby="v-pills-orders-tab">
+
+                <ol class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="mx-auto">
+                            <div class="fw-bold">Активные записи</div>
+                        </div>
+                    </li>
+                </ol>
+
+                <ol class="list-group list-group-numbered">
+                    <li class="list-group-item list-group-item-success d-flex justify-content-between align-items-start"
+                        th:each="ServiceOrder : ${activeOrders}">
+                        <div class="ms-2 me-5">
+                            <div class="fw-bold"
+                                 th:text="${#calendars.format(ServiceOrder.executionDate,'dd.MM.yyyy HH:mm')}">Order
+                                execution date
+                            </div>
+                        </div>
+                        <span class="text-start me-auto" th:text="${ServiceOrder.services}">Services in order</span>
+                        <form th:method="post" th:action="@{/service_order/{id} (id=${ServiceOrder.getId()})}">
+                            <input class="btn btn-primary" type="submit" value="Отменить"/>
+                        </form>
+                    </li>
+                </ol>
+
+                <ol class="list-group list-group-flush mt-5">
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="mx-auto">
+                            <div class="fw-bold">Завершённые записи</div>
+                        </div>
+                    </li>
+                </ol>
+
+                <ol class="list-group list-group-numbered">
+                    <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-start"
+                        th:each="ServiceOrder : ${completedOrders}">
+                        <div class="ms-2 me-5">
+                            <div class="fw-bold"
+                                 th:text="${#calendars.format(ServiceOrder.executionDate,'dd.MM.yyyy HH:mm')}">Order
+                                execution date
+                            </div>
+                        </div>
+                        <span class="text-start me-auto" th:text="${ServiceOrder.services}">Services in order</span>
+                    </li>
+                </ol>
             </div>
-        </li>
-    </ol>
-    <ol class="list-group list-group-numbered">
-        <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-start"
-            th:each="ServiceOrder : ${completedOrders}">
-            <div class="ms-2 me-5">
-                <div class="fw-bold" th:text="${#calendars.format(ServiceOrder.executionDate,'dd.MM.yyyy HH:mm')}">Order
-                    execution date
+
+            <div th:class="${isValidating}? 'tab-pane fade show active' : 'tab-pane fade'"
+                 id="v-pills-change_profile_details" role="tabpanel"
+                 aria-labelledby="v-pills-change_profile_details-tab">
+
+                <div class="row justify-content-md-center">
+                    <div class="col-md-3">
+
+                        <form class="form" method="post" th:action="@{/user_profile}" th:object="${userDetailsForm}">
+
+                            <div class="row my-2">
+                                <input class="form-control" type="password" placeholder="Новый пароль" name="password"
+                                       id="password" aria-describedby="passwordHelp" th:field="*{password}">
+                                <div id="passwordHelp" class="form-text">Минимум шесть символов</div>
+                                <div class="alert alert-danger" th:if="${passwordError}"
+                                     th:text="${passwordError}"></div>
+                            </div>
+
+                            <div class="row my-2">
+                                <input class="form-control" type="password" name="passwordConfirmation"
+                                       placeholder="Подтвердите новый пароль" th:field="*{passwordConfirmation}"/>
+                                <div class="alert alert-danger" th:if="${passwordConfirmationError}"
+                                     th:text="${passwordConfirmationError}"></div>
+                            </div>
+
+                            <div class="row my-2">
+                                <input class="form-control" type="text" id="email"
+                                       name="email" placeholder="Email" th:field="*{email}">
+                                <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}"
+                                     th:errors="*{email}"></div>
+                            </div>
+
+                            <div class="row my-2">
+                                <input class="form-control" type="text" id="phoneNumber"
+                                       name="phoneNumber" placeholder="Номер телефона"
+                                       aria-describedby="phoneNumberHelp" th:field="*{phoneNumber}">
+                                <div id="phoneNumberHelp" class="form-text">В любом формате</div>
+                                <div class="alert alert-danger" th:if="${#fields.hasErrors('phoneNumber')}"
+                                     th:errors="*{phoneNumber}"></div>
+                            </div>
+
+                            <div class="row my-2">
+                                <input type="submit" class="btn btn-success" value="Сохранить">
+                            </div>
+
+                            <div class="row my-2">
+                                <div class="alert alert-success" th:if="${userUpdateSuccess}"
+                                     th:text="${userUpdateSuccess}"></div>
+                            </div>
+                        </form>
+
+                    </div>
                 </div>
             </div>
-            <span class="text-start me-auto" th:text="${ServiceOrder.services}">Services in order</span>
-        </li>
-    </ol>
+        </div>
+    </div>
 </div>
 
 <div th:insert="~{fragments :: BootstrapJS}"></div>

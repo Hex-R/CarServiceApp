@@ -52,6 +52,7 @@
             </div>
 
             <div sec:authorize="hasAuthority('USER')">
+                <a class="btn btn-primary" th:href="@{/user_profile}" role="button"> User profile</a>
                 <form method="post" th:action="@{/logout}">
                     <button class="btn btn-primary" type="submit"> Logout</button>
                 </form>
