@@ -69,5 +69,8 @@ public class ServiceOrderController {
 
         model.addAttribute("bodyRepairServices",
                 carServiceRepository.findByType(ServiceType.BODY_REPAIR));
+
+        model.addAttribute("tireFittingServices",
+                carServiceRepository.findByType(ServiceType.TIRE_FITTING));
     }
 }

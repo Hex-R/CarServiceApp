@@ -7,28 +7,78 @@
 
 <div th:insert="~{fragments :: navbar}"></div>
 
-<img th:src="@{/images/repair_banner.jpg}" class="img-fluid" />
+<img th:src="@{/images/repair_banner.jpg}" class="img-fluid"/>
 
 <div class="d-grid gap-2 col-8 mx-auto my-2">
-    <a class="btn btn-primary" th:href="@{/service_order}" role="button"> <h2> Записаться на сервис </h2> </a>
+    <a class="btn btn-primary" th:href="@{/service_order}" role="button"><h2> Записаться на сервис </h2></a>
 </div>
 
-<table class="table table-dark table-striped">
-    <thead>
-    <tr>
-        <th scope="col">Услуга</th>
-        <th scope="col">Стоимость</th>
-    </tr>
-    </thead>
-    <tbody>
-    <div th:each="CarService : ${repairServices}">
-        <tr>
-            <td th:text="${CarService.getName()}"> service name </td>
-            <td th:text="${'от ' + CarService.getPrice()}"> service price </td>
-        </tr>
+<div class="row justify-content-md-center">
+    <div class="col-md-11">
+        <table class="table table-dark table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Услуга</th>
+                <th scope="col">Стоимость</th>
+            </tr>
+            </thead>
+            <tbody>
+            <div th:each="CarService : ${repairServices}">
+                <tr>
+                    <td th:text="${CarService.getName()}"> service name</td>
+                    <td th:text="${'от ' + CarService.getPrice()}"> service price</td>
+                </tr>
+            </div>
+            </tbody>
+        </table>
     </div>
-    </tbody>
-</table>
+</div>
+
+<div class="block">
+    <div class="container">
+        <div class="row justify-content-md-center my-2">
+            <div class="col-md-10">
+                <div class="height">
+                    Как бы ни стремился человек к вечному двигателю, изобрести его пока не удалось. Даже "неубиваемые"
+                    немецкие марки на поверку оказываются довольно уязвимыми, требуют ремонта. Нельзя точно предсказать,
+                    когда он понадобится, важно знать, что этот момент придет. Чем дольше раздумывает водитель, заметив
+                    неисправность, тем выше цена ремонта авто в Ростове-на-Дону.
+                    <h2>
+                        Виды ремонта автомобилей</h2>
+                    <p>
+                        Ремонт грузовых и легковых машин в XXI веке даже примерно не напоминает гараж с хмурыми
+                        мужчинами в спецовках и с примитивным набором инструментом в руках. Одна только диагностика
+                        требует сложного оборудования, созданного с использованием высоких технологий.
+                    </p>
+                    <p>
+                        Попадая в СТО в Ростове-на-Дону, машина проходит последовательно ряд ступеней в виде:
+                    </p>
+                    <ul>
+                        <li>диагностики. Машину осматривают, считывают, расшифровывают коды ошибок, агрегаты разбирают;</li>
+                        <li>технического обслуживания;</li>
+                        <li>слесарного ремонта (текущего или капитального);</li>
+                        <li>ремонта электроники, электрооборудования;</li>
+                        <li>кузовного ремонта.</li>
+                    </ul>
+                    <p>
+                        Каждый этап, даже такой на первый взгляд простой, как покраска, требует сложной работы и участия
+                        мастеров высокой квалификации. Многие автосервисы экономят на курсах повышения для специалистов,
+                        а чек выставляют более высокий, чем у нашей компании.
+                    </p>
+                    <h2>
+                        Почему мы</h2>
+                    <p>
+                        Даже новая машина однажды потребует ремонта, неважно, полного или частичного. Здесь на первом
+                        месте не стоимость ремонта авто, а отношение к автомобилю. Приезжайте к нам в сервис - мы
+                        проверим авто и найдем компромиссный тип ремонта автомобиля, опираясь на ваш бюджет, техническое
+                        состояние машины, ее остаточный ресурс. На все услуги действует гарантия до 1 года.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
 
 <div th:insert="~{fragments :: BootstrapJS}"></div>
 

@@ -14,7 +14,7 @@ public class MainController {
     CarServiceRepository carServiceRepository;
 
     @GetMapping("/maintenance")
-    public String showMaintenanceServices(Model model){
+    public String showMaintenanceServices(Model model) {
 
         model.addAttribute("maintenanceServices",
                 carServiceRepository.findByType(ServiceType.MAINTENANCE));
@@ -23,7 +23,7 @@ public class MainController {
     }
 
     @GetMapping("/diagnostics")
-    public String showDiagnosticsServices(Model model){
+    public String showDiagnosticsServices(Model model) {
 
         model.addAttribute("diagnosticsServices",
                 carServiceRepository.findByType(ServiceType.DIAGNOSTICS));
@@ -32,7 +32,7 @@ public class MainController {
     }
 
     @GetMapping("/repair")
-    public String showRepairServices(Model model){
+    public String showRepairServices(Model model) {
 
         model.addAttribute("repairServices",
                 carServiceRepository.findByType(ServiceType.REPAIR));
@@ -41,7 +41,7 @@ public class MainController {
     }
 
     @GetMapping("/body_repair")
-    public String showBodyRepairServices(Model model){
+    public String showBodyRepairServices(Model model) {
 
         model.addAttribute("bodyRepairServices",
                 carServiceRepository.findByType(ServiceType.BODY_REPAIR));
@@ -50,19 +50,16 @@ public class MainController {
     }
 
     @GetMapping("/tire_fitting")
-    public String showTireFittingServices(Model model){
+    public String showTireFittingServices(Model model) {
 
-
+        model.addAttribute("tireFittingServices",
+                carServiceRepository.findByType(ServiceType.TIRE_FITTING));
 
         return "tire_fitting";
     }
 
-    @GetMapping("/tires_and_wheels")
-    public String showTiresAndWheels(Model model){
-
-
-
-        return "tires_and_wheels";
+    @GetMapping("/contacts")
+    public String showContactsPage() {
+        return "contacts";
     }
-
 }

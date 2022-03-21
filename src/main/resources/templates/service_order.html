@@ -75,6 +75,22 @@
             </div>
         </div>
 
+        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#type5"
+                aria-expanded="false" aria-controls="type5">
+            Шиномонтаж
+        </button>
+        <div class="collapse" id="type5">
+            <div th:each="CarService : ${tireFittingServices}">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" th:field="*{services}"
+                           th:value="${CarService.id}"
+                           id="flexCheck5">
+                    <label class="form-check-label" for="flexCheck5" th:text="${CarService.name}"> Car
+                        service </label>
+                </div>
+            </div>
+        </div>
+
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('services')}">
             <p class="text-center" th:errors="*{services}"> Error text </p>
         </div>

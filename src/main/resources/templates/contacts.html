@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:insert="~{fragments :: head}"></div>
+
+<body>
+
+<div th:insert="~{fragments :: navbar}"></div>
+
+<img th:src="@{/images/main_banner.jpg}" class="img-fluid" />
+
+<div class="row my-3 mx-2">
+    <div class="col"></div>
+
+    <div class="col mx-auto">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item active"><h4>Ростов-на-Дону</h4></li>
+            <li class="list-group-item">Адрес: 344091, Ростов-на-Дону, ул. Малиновского 54</li>
+            <li class="list-group-item">Телефон: +7 (863) 123-12-34</li>
+            <li class="list-group-item">Режим работы: ежедневно с 8:00 до 21:00</li>
+
+            <li class="list-group-item mt-4 active"><h4>ООО «Экс-Сервис»</h4></li>
+            <li class="list-group-item">ИНН 6163294086</li>
+            <li class="list-group-item">Юридический адрес: 344019, г. Ростов-на-Дону, улица Пушкина, д. Колотушкина</li>
+            <li class="list-group-item">E-mail: hex.raeder@gmail.com</li>
+        </ul>
+    </div>
+
+    <div class="col"></div>
+</div>
+
+<div th:insert="~{fragments :: BootstrapJS}"></div>
+
+</body>
+</html>
