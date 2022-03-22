@@ -2,11 +2,11 @@ create sequence hibernate_sequence start 4 increment 1;
 
 create table car_service
 (
-    id          int8 not null,
-    type        varchar(255) not null,
-    name        varchar(255) not null,
+    id          int8          not null,
+    type        varchar(255)  not null,
+    name        varchar(255)  not null,
     description varchar(2048) not null,
-    price       int4 not null,
+    price       int4          not null,
     primary key (id)
 );
 create table service_order
@@ -15,7 +15,7 @@ create table service_order
     placed_at      timestamp not null,
     execution_date timestamp not null,
     is_completed   boolean   not null,
-    user_id        int8 not null,
+    user_id        int8      not null,
     primary key (id)
 );
 create table service_order_services
@@ -30,8 +30,8 @@ create table user_role
 );
 create table usr
 (
-    id              int8 not null,
-    active          boolean not null,
+    id              int8        not null,
+    active          boolean     not null,
     username        varchar(30) not null,
     password        varchar(70) not null,
     email           varchar(50) not null,

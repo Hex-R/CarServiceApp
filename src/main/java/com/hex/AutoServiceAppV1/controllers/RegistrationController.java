@@ -3,7 +3,6 @@ package com.hex.AutoServiceAppV1.controllers;
 import com.hex.AutoServiceAppV1.models.User;
 import com.hex.AutoServiceAppV1.models.dto.CaptchaResponseDto;
 import com.hex.AutoServiceAppV1.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,17 +17,20 @@ import java.util.Collections;
 @RequestMapping("/register")
 public class RegistrationController {
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private RestTemplate restTemplate;
-
     @Value("${recaptcha.secret}")
     private String recaptchaSecret;
 
     @Value("${recaptcha.url}")
     private String recaptchaUrl;
+
+    private final UserService userService;
+
+    private final RestTemplate restTemplate;
+
+    public RegistrationController(UserService userService, RestTemplate restTemplate) {
+        this.userService = userService;
+        this.restTemplate = restTemplate;
+    }
 
     @GetMapping
     public String showRegistrationForm(@ModelAttribute("user") User user) {
@@ -45,13 +47,13 @@ public class RegistrationController {
         String url = String.format(recaptchaUrl, recaptchaSecret, recaptchaClientResponse);
         CaptchaResponseDto recaptchaServerResponse = restTemplate.postForObject(url, Collections.emptyList(), CaptchaResponseDto.class);
 
-        if (!recaptchaServerResponse.isSuccess()){
+        if (!recaptchaServerResponse.isSuccess()) {
             model.addAttribute("recaptchaError", "Пройдите капчу");
         }
 
         boolean isPasswordConfirmationIncorrect = !user.getPassword().equals(passwordConfirmation);
 
-        if (isPasswordConfirmationIncorrect){
+        if (isPasswordConfirmationIncorrect) {
             model.addAttribute("passwordConfirmationError", "Пароли не совпадают");
         }
 
@@ -67,7 +69,7 @@ public class RegistrationController {
     }
 
     @GetMapping("/success")
-    public String showRegistrationSuccessPage(){
+    public String showRegistrationSuccessPage() {
         return "registration_success";
     }
 

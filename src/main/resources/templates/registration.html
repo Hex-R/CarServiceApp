@@ -25,8 +25,8 @@
                 </div>
 
                 <div class="row my-2">
-                    <input class="form-control" type="password" th:field="*{password}" id="password" placeholder="Пароль"
-                           aria-describedby="passwordHelp"/>
+                    <input class="form-control" type="password" th:field="*{password}" id="password"
+                           placeholder="Пароль" aria-describedby="passwordHelp"/>
                     <div id="passwordHelp" class="form-text">Минимум шесть символов</div>
                     <div class="alert alert-danger" th:if="${#fields.hasErrors('password')}"
                          th:errors="*{password}"></div>
@@ -40,7 +40,8 @@
                 </div>
 
                 <div class="row my-2">
-                    <input class="form-control" type="text" th:field="*{email}" id="email" placeholder="Email" aria-describedby="emailHelp">
+                    <input class="form-control" type="text" th:field="*{email}" id="email" placeholder="Email"
+                           aria-describedby="emailHelp">
                     <div id="emailHelp" class="form-text">Мы отправим вам ссылку для верификации</div>
                     <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                 </div>
@@ -74,7 +75,6 @@
 
     </div>
 </div>
-
 
 <div th:insert="~{fragments :: BootstrapJS}"></div>
 

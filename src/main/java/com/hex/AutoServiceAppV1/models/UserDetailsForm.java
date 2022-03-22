@@ -27,11 +27,11 @@ public class UserDetailsForm {
     @Size(min = 7, max = 12, message = "Необходимо 7 - 12 знаков без пробелов и скобок")
     private String phoneNumber;
 
-    public UserDetailsForm(){
+    public UserDetailsForm() {
 
     }
 
-    public UserDetailsForm(User user){
+    public UserDetailsForm(User user) {
         this.setEmail(user.getEmail());
         this.setPhoneNumber(user.getPhoneNumber());
     }

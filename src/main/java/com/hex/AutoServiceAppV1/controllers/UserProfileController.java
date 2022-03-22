@@ -4,7 +4,6 @@ import com.hex.AutoServiceAppV1.models.User;
 import com.hex.AutoServiceAppV1.models.UserDetailsForm;
 import com.hex.AutoServiceAppV1.repositories.ServiceOrderRepository;
 import com.hex.AutoServiceAppV1.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +18,14 @@ import javax.validation.Valid;
 @RequestMapping("/user_profile")
 public class UserProfileController {
 
-    @Autowired
-    ServiceOrderRepository serviceOrderRepository;
+    private final ServiceOrderRepository serviceOrderRepository;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserProfileController(ServiceOrderRepository serviceOrderRepository, UserService userService) {
+        this.serviceOrderRepository = serviceOrderRepository;
+        this.userService = userService;
+    }
 
     @GetMapping
     public String showUserProfilePage(@AuthenticationPrincipal User user, Model model) {
@@ -54,11 +56,11 @@ public class UserProfileController {
             return "user_profile";
         }
 
-        if (userService.updateUser(user, userDetailsForm)){
+        if (userService.updateUser(user, userDetailsForm)) {
             addOrdersToModel(model, user);
             model.addAttribute("isValidating", true);
             model.addAttribute("userUpdateSuccess", "Данные успешно изменены");
-        }else {
+        } else {
             addOrdersToModel(model, user);
             model.addAttribute("isValidating", true);
             model.addAttribute("passwordError", "Необходимо 6 - 30 символов");

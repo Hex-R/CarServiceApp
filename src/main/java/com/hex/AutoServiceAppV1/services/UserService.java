@@ -4,7 +4,6 @@ import com.hex.AutoServiceAppV1.models.Role;
 import com.hex.AutoServiceAppV1.models.User;
 import com.hex.AutoServiceAppV1.models.UserDetailsForm;
 import com.hex.AutoServiceAppV1.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,14 +21,17 @@ public class UserService implements UserDetailsService {
     @Value("${hostname}")
     private String hostname;
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    MailSenderService mailSenderService;
+    private final MailSenderService mailSenderService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository, MailSenderService mailSenderService, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.mailSenderService = mailSenderService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public boolean addUser(User user) {
         User userFromDb = userRepository.findByUsername(user.getUsername());
@@ -50,15 +52,15 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
-    public boolean updateUser(User user, UserDetailsForm userDetailsForm){
+    public boolean updateUser(User user, UserDetailsForm userDetailsForm) {
 
         String newPassword = userDetailsForm.getPassword();
 
-        if (StringUtils.hasLength(newPassword)){
+        if (StringUtils.hasLength(newPassword)) {
 
-            if (StringUtils.hasText(newPassword) && newPassword.length() >= 6 && newPassword.length() <= 30){
+            if (StringUtils.hasText(newPassword) && newPassword.length() >= 6 && newPassword.length() <= 30) {
                 user.setPassword(passwordEncoder.encode(userDetailsForm.getPassword()));
-            }else return false;
+            } else return false;
         }
 
         user.setEmail(userDetailsForm.getEmail());

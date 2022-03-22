@@ -2,7 +2,6 @@ package com.hex.AutoServiceAppV1.controllers;
 
 import com.hex.AutoServiceAppV1.models.ServiceType;
 import com.hex.AutoServiceAppV1.repositories.CarServiceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @Autowired
-    CarServiceRepository carServiceRepository;
+    private final CarServiceRepository carServiceRepository;
+
+    public MainController(CarServiceRepository carServiceRepository) {
+        this.carServiceRepository = carServiceRepository;
+    }
 
     @GetMapping("/maintenance")
     public String showMaintenanceServices(Model model) {

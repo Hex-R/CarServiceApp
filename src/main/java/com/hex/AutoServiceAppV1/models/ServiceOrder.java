@@ -29,7 +29,7 @@ public class ServiceOrder {
     private User user;
 
     @NotEmpty(message = "Выберите услуги")
-    @ManyToMany(targetEntity=CarService.class)
+    @ManyToMany(targetEntity = CarService.class)
     private List<CarService> services;
 
     private boolean isCompleted;

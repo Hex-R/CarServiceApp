@@ -23,7 +23,5 @@ public class CarService {
 
     private int price;
 
-    public String toString(){
-        return name;
-    }
+    public String toString() {return name;}
 }
