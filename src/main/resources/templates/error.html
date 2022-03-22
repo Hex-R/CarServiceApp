@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:insert="~{fragments :: head}"></div>
+
+<body>
+
+<div th:insert="~{fragments :: navbar}"></div>
+
+<img th:src="@{/images/error_page_banner.jpg}" class="img-fluid"/>
+
+<div class="row justify-content-md-center my-4">
+    <div class="col-md-4">
+        <h1>Страница не найдена</h1>
+    </div>
+</div>
+
+
+
+<div th:insert="~{fragments :: BootstrapJS}"></div>
+
+</body>
+</html>

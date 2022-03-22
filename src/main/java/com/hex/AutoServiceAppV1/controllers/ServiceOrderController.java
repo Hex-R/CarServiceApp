@@ -48,7 +48,6 @@ public class ServiceOrderController {
         return "redirect:/user_profile";
     }
 
-    //Нужно заменить на Delete и разобраться с ошибкой 405
     @PostMapping("/{id}")
     public String deleteServiceOrder(@PathVariable Long id){
 

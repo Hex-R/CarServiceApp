@@ -36,7 +36,6 @@ public class UserProfileController {
         return "user_profile";
     }
 
-    //Здесь должен быть PatchMapping
     @PostMapping
     public String updateUserProfile(@AuthenticationPrincipal User user,
                                     @Valid UserDetailsForm userDetailsForm,
