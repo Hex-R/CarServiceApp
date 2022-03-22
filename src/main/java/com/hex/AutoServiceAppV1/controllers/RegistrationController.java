@@ -86,6 +86,6 @@ public class RegistrationController {
             model.addAttribute("activationMessage", "Пользователь был активирован ранее");
         }
 
-        return "/login";
+        return "login";
     }
 }
