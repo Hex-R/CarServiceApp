@@ -80,7 +80,7 @@ public class UserService implements UserDetailsService {
                     user.getActivationCode()
             );
 
-            mailSenderService.send(user.getEmail(), "Activation code", message);
+            mailSenderService.send(user.getEmail(), "Код активации", message);
         }
     }
 
