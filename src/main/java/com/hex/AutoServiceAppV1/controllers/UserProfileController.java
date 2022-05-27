@@ -32,7 +32,7 @@ public class UserProfileController {
 
         addOrdersToModel(model, user);
 
-        model.addAttribute("user", user);
+//        model.addAttribute("user", user);
         model.addAttribute("userDetailsForm", new UserDetailsForm(user));
 
         return "user_profile";
@@ -44,7 +44,10 @@ public class UserProfileController {
                                     BindingResult bindingResult,
                                     Model model) {
 
-        boolean isPasswordConfirmationIncorrect = !userDetailsForm.getPassword().equals(userDetailsForm.getPasswordConfirmation());
+        boolean isPasswordConfirmationIncorrect = false;
+
+        if (userDetailsForm.getPassword() != null)
+        isPasswordConfirmationIncorrect = !userDetailsForm.getPassword().equals(userDetailsForm.getPasswordConfirmation());
 
         if (isPasswordConfirmationIncorrect) {
             model.addAttribute("passwordConfirmationError", "Пароли не совпадают");

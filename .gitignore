@@ -1,5 +1,6 @@
 *.properties
 !application-example.properties
+!application-test-example.properties
 scripts
 *.sh
 
